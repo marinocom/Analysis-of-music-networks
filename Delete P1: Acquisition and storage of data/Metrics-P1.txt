@@ -1,0 +1,24 @@
+### IMPORTANT METRICS P1 ###
+
+Taylor Swift crawled BFS
+gB degree stats: {'in_degree': {'min': 1, 'max': 38, 'median': 2}, 'out_degree': {'min': 0, 'max': 20, 'median': 0}, 'number_of_nodes': 473, 'number_of_edges': 2000}
+
+Taylor Swift crawled DFS
+gD degree stats: {'in_degree': {'min': 0, 'max': 33, 'median': 2}, 'out_degree': {'min': 0, 'max': 20, 'median': 0}, 'number_of_nodes': 601, 'number_of_edges': 1995}
+
+
+Pastel Ghost crawled BFS
+hB degree stats: {'in_degree': {'min': 1, 'max': 22, 'median': 1}, 'out_degree': {'min': 0, 'max': 20, 'median': 0}, 'number_of_nodes': 764, 'number_of_edges': 1995}
+
+
+SONGS.CSV
+Number of nodes in the intersection: 138
+Number of edges in the intersection: 140
+Batch 1 processed. Waiting for 10 seconds...
+Batch 2 processed. Waiting for 10 seconds...
+Batch 3 processed. Waiting for 10 seconds...
+Batch 4 processed. Waiting for 10 seconds...
+Batch 5 processed. Waiting for 10 seconds...
+Artists: 138
+Albums: 733
+Songs: 1269
