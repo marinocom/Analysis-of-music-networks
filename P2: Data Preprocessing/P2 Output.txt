@@ -1,0 +1,23 @@
+P2 Output:
+
+Metrics for Undirected Graph g'B:
+Order (number of nodes): 99
+Size (number of edges): 307
+Density: 0.0633
+Connected components: 1
+Metrics for Undirected Graph g'D:
+Order (number of nodes): 95
+Size (number of edges): 221
+Density: 0.0495
+Connected components: 4
+Metrics for Similarity Graph:
+Order (number of nodes): 138
+Size (number of edges): 9547
+Density: 1.0099
+Connected components: 1
+Debug: Most similar edge weight: 0.9999913066533639
+Debug: Least similar edge weight: 0.999847611985269
+Most similar artists: Lana Del Rey and Taylor Swift with weight 0.9999913066533639
+Least similar artists: Hannah Montana and Mitchel Musso with weight 0.999847611985269
+Artist most similar to all others: Hailee Steinfeld
+Artist least similar to all others: Phillipa Soo
