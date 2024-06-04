@@ -2,6 +2,9 @@ import networkx as nx
 from collections import Counter
 import community as community_louvain
 
+# Marino Oliveros Blanco NIU:1668563
+# Pere Mayol Carbonell NIU:1669503
+
 # ------- IMPLEMENT HERE ANY AUXILIARY FUNCTIONS NEEDED ------- #
 
 # Function to get artist names from IDs using the graph node attributes

@@ -3,6 +3,9 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 import matplotlib.pyplot as plt
 
+# Marino Oliveros Blanco NIU:1668563
+# Pere Mayol Carbonell NIU:1669503
+
 def retrieve_bidirectional_edges(g: nx.DiGraph, out_filename: str) -> nx.Graph:
     """
     Convert a directed graph into an undirected graph by considering bidirectional edges only.
