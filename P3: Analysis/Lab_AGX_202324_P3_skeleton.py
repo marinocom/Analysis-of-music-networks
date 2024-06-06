@@ -5,20 +5,21 @@ import community as community_louvain
 # Marino Oliveros Blanco NIU:1668563
 # Pere Mayol Carbonell NIU:1669503
 
+
 # ------- IMPLEMENT HERE ANY AUXILIARY FUNCTIONS NEEDED ------- #
 
 # Function to get artist names from IDs using the graph node attributes
 def get_artist_names(graph, artist_ids):
     return [(artist_id, graph.nodes[artist_id].get('name', 'Unknown Artist')) for artist_id in artist_ids]
 
-# Function to find the minimum cost to ensure ads will be heard
+# Function to find the minimum cost
 def min_ad_cost(g):
     # Find all strongly connected components in the graph
     sccs = list(nx.strongly_connected_components(g))
-    min_cost = len(sccs)  # Each SCC needs at least one ad to ensure coverage
+    min_cost = len(sccs)  # Each SCC (strongly connected comp) needs at least one ad to ensure coverage
     return min_cost
 
-# Function to select the most central artists within a budget to maximize spread
+# Function to select the most central artists within a budget to maximize spread (explained why in the report)
 def select_artists_for_budget(g, budget):
     sccs = list(nx.strongly_connected_components(g))
     scc_central_nodes = []
@@ -114,11 +115,11 @@ def detect_communities(g: nx.Graph, method: str) -> tuple:
     :param method: string with the name of the method to use. Can be (at least) 'girvan-newman' or 'louvain'.
     :return: two-element tuple, list of communities (each community is a list of nodes) and modularity of the partition.
     """
-    if method == 'girvan-newman':
+    if method == 'girvan-newman': # use Girvan-Newman method as done in class
         communities_generator = nx.community.girvan_newman(g)
         top_level_communities = next(communities_generator)
         communities = [list(c) for c in top_level_communities]
-    elif method == 'louvain':
+    elif method == 'louvain': # Lovain/Leuven (little town near Brussels) method an algorithm to detect communities in large networks (for it you have to 'pip install python-louvain')
 
         if g.is_directed():
             g = g.to_undirected()
@@ -137,12 +138,12 @@ def detect_communities(g: nx.Graph, method: str) -> tuple:
 # ------- IMPLEMENT HERE THE MAIN FOR THIS SESSION ------- #
 
 def main():
-    gD = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P1: Acquisition and storage of data/gD.graphml')
-    gB = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P1: Acquisition and storage of data/gB.graphml')
-    gBp = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P2: Data Preprocessing/gBp.graphml')
-    gw = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P2: Data Preprocessing/gw.graphml')
-    hB = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P1: Acquisition and storage of data/hB.graphml')
-    gDp = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P2: Data Preprocessing/gDp.graphml')
+    gD = nx.read_graphml('gD.graphml')
+    gB = nx.read_graphml('gB.graphml')
+    gBp = nx.read_graphml('gBp.graphml')
+    gw = nx.read_graphml('gw.graphml')
+    hB = nx.read_graphml('hB.graphml')
+    gDp = nx.read_graphml('gDp.graphml')
 
 
     # Number of common nodes between gB and gD
@@ -161,7 +162,7 @@ def main():
     print(f"Number of common nodes between degree and betweenness centrality: {len(common_central_nodes)}")
 
     # Find cliques of size greater than or equal to min_size_clique in gBp and gDp
-    min_size_clique = 7  # Max num with at least 2 cliques
+    min_size_clique = 7  # Max num with at least 2 cliques (did this by trial an error)
     cliques_gBp, nodes_in_cliques_gBp = find_cliques(gBp, min_size_clique)
     cliques_gDp, nodes_in_cliques_gDp = find_cliques(gDp, min_size_clique)
 
@@ -212,8 +213,8 @@ def main():
             return float('inf'), []
 
     # Minimum hops from "Taylor Swift" to "THE DRIVER ERA"
-    start_artist = '06HL4z0CvFAxyc27GXpf02'  # Taylor Swift
-    target_artist = '5bmqhxWk9SEFDGIzWpSjVJ'  # THE DRIVER ERA
+    start_artist = '06HL4z0CvFAxyc27GXpf02'  # Taylor Swift id
+    target_artist = '5bmqhxWk9SEFDGIzWpSjVJ'  # THE DRIVER ERA id
     try:
         min_hops, path = min_hops_between_artists(gB, start_artist, target_artist)
         path_with_names = get_artist_names(gB, path)

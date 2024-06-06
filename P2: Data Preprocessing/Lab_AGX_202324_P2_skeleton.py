@@ -133,7 +133,7 @@ def create_similarity_graph(artist_audio_features_df: pd.DataFrame, similarity: 
     # Add edges with similarity weights
     for i in range(num_artists):
         for j in range(i + 1, num_artists):
-            if i != j:  # Avoid self-loops
+            if i != j:  # Avoid self-loops (so artist's similarity is not compared to themeselves)
                 similarity_graph.add_edge(artist_audio_features_df.iloc[i, 0], artist_audio_features_df.iloc[j, 0],
                                           weight=similarity_matrix[i, j])
                 similarity_graph.nodes[artist_audio_features_df.iloc[i, 0]]['name'] = artist_audio_features_df.iloc[i, 1]
@@ -189,23 +189,23 @@ def find_most_least_similar_to_all(graph):
 # --------------- MAIN FUNCTION TO RUN THE CODE --------------- #
 def main():
     # Load the graphs
-    gB = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P1: Acquisition and storage of data/gB.graphml')
-    gD = nx.read_graphml('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P1: Acquisition and storage of data/gD.graphml')
+    gB = nx.read_graphml('gB.graphml')
+    gD = nx.read_graphml('gD.graphml')
 
     # Load tracks data 
-    tracks_df = pd.read_csv('/Users/marino/Documents/GitHub/Analysis-of-music-networks/P1: Acquisition and storage of data/songs.csv')
+    tracks_df = pd.read_csv('songs.csv')
     tracks_df = pd.DataFrame(tracks_df)
 
     # Task 6(a): Generate undirected graphs g'B and g'D
-    gB_undirected = retrieve_bidirectional_edges(gB, '/Users/marino/Documents/GitHub/Analysis-of-music-networks/P2: Data Preprocessing/gBp.graphml')
-    gD_undirected = retrieve_bidirectional_edges(gD, '/Users/marino/Documents/GitHub/Analysis-of-music-networks/P2: Data Preprocessing/gDp.graphml')
+    gB_undirected = retrieve_bidirectional_edges(gB, 'gBp.graphml')
+    gD_undirected = retrieve_bidirectional_edges(gD, 'gDp.graphml')
 
     # Task 6(b): Compute mean audio features
     mean_audio_features_df = compute_mean_audio_features(tracks_df)
     print(mean_audio_features_df)
 
     # Create similarity graph
-    similarity_graph = create_similarity_graph(mean_audio_features_df, 'cosine', '/Users/marino/Documents/GitHub/Analysis-of-music-networks/P2: Data Preprocessing/gw.graphml')
+    similarity_graph = create_similarity_graph(mean_audio_features_df, 'cosine', 'gw.graphml')
     print("Graphs have been processed and saved successfully.")
 
   # Visualize the graphs
