@@ -404,17 +404,20 @@ def plot_similarity_heatmap_all(artist_audio_features_df: pd.DataFrame, similari
 if __name__ == "__main__":
     
     # ------- IMPLEMENT HERE THE MAIN FOR THIS SESSION ------- #
-    gBp = nx.read_graphml('C:/Users/perem/OneDrive/Escriptori/2n AI/2n semestre/Graph and Network Analysis/PROJECT/FINALFINAL/gBp.graphml')
-    gDp = nx.read_graphml('C:/Users/perem/OneDrive/Escriptori/2n AI/2n semestre/Graph and Network Analysis/PROJECT/FINALFINAL/gDp.graphml')
+    gBp = nx.read_graphml('gBp.graphml')
+    gDp = nx.read_graphml('gDp.graphml')
+    gw = nx.read_graphml('gw.graphml')
 
-    songs = pd.read_csv('C:/Users/perem/OneDrive/Escriptori/2n AI/2n semestre/Graph and Network Analysis/PROJECT/FINALFINAL/songs.csv')
+    songs = pd.read_csv('songs.csv')
     mean_audio_features = compute_mean_audio_features(songs)
 
     gBp_deg_dist = get_degree_distribution(gBp)
     gDp_deg_dist = get_degree_distribution(gDp)
+    gw_deg_dist = get_degree_distribution(gw)
 
-    plot_degree_distribution(gBp_deg_dist, normalized=False, loglog=False)
+    plot_degree_distribution(gBp_deg_dist, normalized=False, loglog=True)
     plot_degree_distribution(gDp_deg_dist, normalized=False, loglog=False)
+    plot_degree_distribution(gw_deg_dist, normalized=False, loglog=False)
 
     singer_node = '06HL4z0CvFAxyc27GXpf02'
     most_similar, least_similar = find_most_least_similar_to_singer(gw, singer_node)
@@ -429,16 +432,18 @@ if __name__ == "__main__":
 
     gw_prunned = prune_low_weight_edges(gw, min_percentile=70)
     gw_prunned_2 = prune_low_weight_edges(gw, min_percentile=30)
+    gw_prunned_5 = prune_low_weight_edges(gw, min_percentile=86)
     gw_prunned_3 = prune_low_weight_edges(gw, min_percentile=95)
     gw_prunned_4 = prune_low_weight_edges(gw, min_percentile=98)
 
     plot_largest_connected_component(gw_prunned_2, 30)
     plot_largest_connected_component(gw_prunned, 70)
+    plot_largest_connected_component(gw_prunned_5 86)
     plot_largest_connected_component(gw_prunned_3, 95)
     plot_largest_connected_component(gw_prunned_4, 98)
 
-    gB = nx.read_graphml('C:/Users/perem/OneDrive/Escriptori/2n AI/2n semestre/Graph and Network Analysis/PROJECT/FINALFINAL/gB.graphml')
-    gD = nx.read_graphml('C:/Users/perem/OneDrive/Escriptori/2n AI/2n semestre/Graph and Network Analysis/PROJECT/FINALFINAL/gD.graphml')
+    gB = nx.read_graphml('gB.graphml')
+    gD = nx.read_graphml('gD.graphml')
 
     plot_graph_with_communities(gD, title='Directed Graph gD with Communities')
     plot_graph_with_communities(gB, title='Directed Graph gB with Communities')
